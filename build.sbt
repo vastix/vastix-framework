@@ -11,13 +11,14 @@ libraryDependencies ++= {
   val (akkaV, streamHttp) = ("2.3.9", "1.0-M3")
 
   Seq(
-    "org.scala-lang.modules"  % "scala-parser-combinators_2.11"     % "1.0.3",
-    "com.typesafe.akka"       % "akka-stream-experimental_2.11"     % streamHttp,
-    "com.typesafe.akka"       % "akka-http-experimental_2.11"       % streamHttp,
-    "com.typesafe.akka"       % "akka-http-core-experimental_2.11"  % streamHttp,
-    "com.typesafe.akka"       % "akka-actor_2.11"                   % akkaV,
-    "com.typesafe.akka"       % "akka-testkit_2.11"                 % akkaV     % "test",  
-    "org.specs2"              % "specs2-core_2.11"                  % "2.4.16"  % "test"
+    "org.parboiled"           %% "parboiled"                         % "2.0.1",
+    //"org.scala-lang.modules"  % "scala-parser-combinators_2.11"     % "1.0.3",
+    "com.typesafe.akka"       %% "akka-stream-experimental"     % streamHttp,
+    "com.typesafe.akka"       %% "akka-http-experimental"       % streamHttp,
+    "com.typesafe.akka"       %% "akka-http-core-experimental"  % streamHttp,
+    "com.typesafe.akka"       %% "akka-actor"                   % akkaV,
+    "com.typesafe.akka"       %% "akka-testkit"                 % akkaV     % "test",  
+    "org.specs2"              %% "specs2-core"                  % "2.4.16"  % "test"
   )
 
 }

@@ -2,12 +2,6 @@
  * An angine for pragmatic interaction between client and server
  * on the Web
  *
- * For the first time, it was stolen from Daniel Spiewak source code:
- * http://www.codecommit.com/blog/scala/formal-language-processing-in-scala
- *
- * Other resources:
- *  http://stackoverflow.com/questions/1348121/scala-parser-issues
- *
  */
 
 package name.bpdp.kipo.core

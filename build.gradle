@@ -1,0 +1,63 @@
+buildscript {
+	repositories {
+		jcenter()
+	}
+	dependencies {
+		classpath "io.ratpack:ratpack-gradle:0.9.13"
+	}
+}
+
+apply plugin: "io.ratpack.ratpack-java"
+apply plugin: "io.ratpack.ratpack-groovy"
+
+repositories {
+	
+	jcenter()
+
+	maven {url "http://clinker.netty.io/nexus/content/repositories/snapshots"}  
+
+	flatDir {
+		dirs 'libs'
+	}
+}
+
+dependencies {
+	compile fileTree(dir: 'libs', include: '*.jar')
+	runtime "org.slf4j:slf4j-simple:1.7.5"
+	testCompile 'junit:junit:4.11'
+	compile ratpack.dependency("guice")
+}
+
+def configurePom(def pom) {
+	pom.project {
+		name rootProject.name
+		description 'The Pragmatic Web framework'
+		inceptionYear '2015'
+		packaging 'jar'
+
+		url 'http://github.com/bpdp/kipo'
+
+		developers {
+			developer {
+				id 'bpdp'
+				name 'Bambang Purnomosidi D. P.'
+				email 'bpurnomo@akakom.ac.id'
+			}
+		}
+		scm {
+			url 'http://github.com/bpdp/kipo'
+		}
+
+		licenses {
+			license {
+				name 'The Apache Software License, Version 2.0'
+				url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+				distribution 'repo'
+			}
+		}
+
+	    properties {
+			setProperty('project.build.sourceEncoding', 'UTF8')
+		}
+	}
+}

@@ -3,7 +3,7 @@ buildscript {
 		jcenter()
 	}
 	dependencies {
-		classpath "io.ratpack:ratpack-gradle:0.9.13"
+		classpath "io.ratpack:ratpack-gradle:0.9.14"
 	}
 }
 
@@ -14,7 +14,13 @@ repositories {
 	
 	jcenter()
 
-	maven {url "http://clinker.netty.io/nexus/content/repositories/snapshots"}  
+	mavenCentral()
+
+	mavenLocal()
+
+	maven {url "http://clinker.netty.io/nexus/content/repositories/snapshots"}
+
+	maven {url "http://www.systap.com/maven/releases"}
 
 	flatDir {
 		dirs 'libs'
@@ -23,6 +29,7 @@ repositories {
 
 dependencies {
 	compile fileTree(dir: 'libs', include: '*.jar')
+	compile "com.bigdata:bigdata:1.5.0"
 	runtime "org.slf4j:slf4j-simple:1.7.5"
 	testCompile 'junit:junit:4.11'
 	compile ratpack.dependency("guice")

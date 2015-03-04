@@ -18,5 +18,8 @@ test-results/
 test-tmp/
 *.class
 *.swp
+*.iml
+*.ipr
+*.iws
 .nb-gradle/
 /.nb-gradle/private/

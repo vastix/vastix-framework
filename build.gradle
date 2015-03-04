@@ -7,7 +7,11 @@ buildscript {
 	}
 }
 
-apply plugin: "io.ratpack.ratpack-java"
+// doesn't need to be declared, it's implicitly loaded by
+// io.ratpach.ratpack-groovy
+// see http://www.ratpack.io/manual/current/all.html#setup
+// apply plugin: "io.ratpack.ratpack-java"
+apply plugin: "idea"
 apply plugin: "io.ratpack.ratpack-groovy"
 
 repositories {

@@ -1,4 +1,4 @@
-![Kipo](assets/images/kipo-logo.png)
+![Kipo](../assets/images/kipo-logo.png)
 
 # Kipo Documentation
 

@@ -7,7 +7,7 @@ buildscript {
                  	'com.github.jengelman.gradle.plugins:shadow:1.2.1',
 					// asciidoc gradle plugin
 					// http://asciidoctor.org/docs/asciidoctor-gradle-plugin/
-					'org.asciidoctor:asciidoctor-gradle-plugin:1.5.0'
+					'org.asciidoctor:asciidoctor-gradle-plugin:1.5.2'
 	}
 }
 
@@ -25,21 +25,7 @@ apply plugin: "io.ratpack.ratpack-groovy"
 // 		an override to process multiple source files, which may be a subset 
 //		of all files available in ${sourceDir}. Type: FileCollection. 
 //		Defaults to all files in ${sourceDir}.
-apply plugin: 'org.asciidoctor.gradle.asciidoctor'
-asciidoctor { 
-    outputDir = new File("$buildDir/docs")
-	backends = ["html5"]
-//    options = [
-//        doctype: 'book',
-//        attributes: [
-//            'source-highlighter': 'coderay',
-//			'toc-title': 'Table of Contents',
-//            toc                 : '',
-//            idprefix            : '',
-//            idseparator         : '-'
-//		]
-//    ]
-}
+apply plugin: 'org.asciidoctor.convert'
 
 if (!JavaVersion.current().java8Compatible) {
   throw new IllegalStateException("Must be built with Java 8 or higher")

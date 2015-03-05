@@ -1,0 +1,11 @@
+image::assets/images/kipo-logo.png[Kipo logo]
+
+== Documentation
+
+....
+$ gradle asciidoc
+....
+
+Results should be in `build/docs`. Start from README.html
+
+

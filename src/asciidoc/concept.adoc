@@ -1,0 +1,6 @@
+= Kipo Concept
+
+In this part, you will find a more detailed explanation about
+this software -- conceptually. It is a little bit academic oriented,
+but I try to connect this with real world.
+

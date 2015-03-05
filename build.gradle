@@ -3,44 +3,67 @@ buildscript {
 		jcenter()
 	}
 	dependencies {
-        classpath 'io.ratpack:ratpack-gradle:0.9.14',
-                  'com.github.jengelman.gradle.plugins:shadow:1.2.1'		
+        classpath	'io.ratpack:ratpack-gradle:0.9.14',
+                 	'com.github.jengelman.gradle.plugins:shadow:1.2.1',
+					// asciidoc gradle plugin
+					// http://asciidoctor.org/docs/asciidoctor-gradle-plugin/
+					'org.asciidoctor:asciidoctor-gradle-plugin:1.5.0'
 	}
 }
 
-// doesn't need to be declared, it's implicitly loaded by
+// doesn't need to be declared, implicitly loaded by
 // io.ratpach.ratpack-groovy
 // see http://www.ratpack.io/manual/current/all.html#setup
 // apply plugin: "io.ratpack.ratpack-java"
 apply plugin: "idea"
 apply plugin: "io.ratpack.ratpack-groovy"
-
-// can not get this to work, need to explore
-//plugins {
-//	id "java"
-//	id "io.ratpack.ratpack-gradle" version "0.9.14"
-//	id "io.ratpack.ratpack-groovy" version "0.9.14"
-//	id "idea"
-//	id "com.github.johnrengelman.shadow" version "1.2.0"
-//}
+// asciidoc - for documentaton
+// sourceDir	
+// 		where the asciidoc sources are. Type: File. Default: src/asciidoc.
+//
+// sourceDocumentNames	
+// 		an override to process multiple source files, which may be a subset 
+//		of all files available in ${sourceDir}. Type: FileCollection. 
+//		Defaults to all files in ${sourceDir}.
+apply plugin: 'org.asciidoctor.gradle.asciidoctor'
+asciidoctor { 
+    outputDir = new File("docs")
+    options = [
+        doctype: 'book',
+        attributes: [
+            'source-highlighter': 'coderay',
+			'toc-title': 'Table of Contents',
+            toc                 : '',
+            idprefix            : '',
+            idseparator         : '-'
+        ]
+    ]
+}
 
 if (!JavaVersion.current().java8Compatible) {
   throw new IllegalStateException("Must be built with Java 8 or higher")
 }
 
+idea {
+    project {
+        jdkName "1.8"
+        languageLevel "1.8"
+        ipr {
+            withXml { provider ->
+                def node = provider.asNode()
+                //configure git support for the project in idea
+                node.component.find { it.'@name' == 'VcsDirectoryMappings' }?.mapping[0].'@vcs' = 'Git'
+            }
+        }
+    }
+}
 
 repositories {
-	
 	jcenter()
-
 	mavenCentral()
-
 	mavenLocal()
-
 	maven {url "http://clinker.netty.io/nexus/content/repositories/snapshots"}
-
 	maven {url "http://www.systap.com/maven/releases"}
-
 	flatDir {
 		dirs 'lib'
 	}

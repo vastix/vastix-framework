@@ -1,0 +1,20 @@
+= Kipo Central Documentation
+Bambang Purnomosidi D. P. <bpurnomo@akakom.ac.id>
+v0.0.1, 2015-03
+:doctype: book
+
+Hello and welcome to Kipo. First, a notice. This documentation is
+still in progress, therefore, it constantly evolving. This
+documentation is divided into some parts.
+
+[Concept]
+
+include::concept.adoc[]
+
+[FAQ]
+
+include::faq.adoc[]
+
+[Guide]
+
+include::guide.adoc[]

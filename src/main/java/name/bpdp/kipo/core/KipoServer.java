@@ -15,8 +15,8 @@ import name.bpdp.kipo.verticles.blazegraph.BlazeGraph;
 public class KipoServer extends AbstractVerticle {
 
   public static void main(String[] args) {
-    KipoRunner.runKipo(BlazeGraph.class);
-    KipoRunner.runKipo(KipoServer.class);
+    KipoRunner.runVerticle(KipoServer.class, true);
+    KipoRunner.runVerticle(BlazeGraph.class, false);
   }
 
   @Override

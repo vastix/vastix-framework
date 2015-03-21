@@ -11,7 +11,7 @@ import java.util.function.Consumer;
  */
 public class RunnerUtil {
 
-	public static void runApp(String prefix, Class clazz, boolean clustered) {
+	public static void run(String prefix, Class clazz, boolean clustered) {
 		String srcDir = prefix + clazz.getPackage().getName().replace(".", "/");
 		execute(srcDir, clazz.getName(), clustered);
 	}

@@ -9,8 +9,12 @@ public class KipoRunner {
 
 	private static final String KIPO_SRC_DIR = "src/main/java/";
 
-	public static void runKipo(Class clazz) {
-		RunnerUtil.runApp(KIPO_SRC_DIR, clazz, true);
+	public static void runVerticle(Class clazz, boolean isClustered) {
+		if (isClustered) {
+			RunnerUtil.run(KIPO_SRC_DIR, clazz, true);
+		} else {
+			RunnerUtil.run(KIPO_SRC_DIR, clazz, false);
+		}
 	}
 
 }

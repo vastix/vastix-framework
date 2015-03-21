@@ -10,6 +10,7 @@ build/
 target/
 project/
 test-output/
+lib/*.jar
 Scratch.java
 ScratchTest.java
 test-results/

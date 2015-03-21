@@ -1,0 +1,10 @@
+== Un-managed Libraries Placholder
+
+I do not put any .jar here since it makes this dist fat. You should go
+to the internet and fetch all .jar needed by this dist:
+
+- TuProlog 3.0.0. Get file *tuprolog.jar*+, change into
+  *tuprolog-3.0.0.jar*+. You may get the file from https://bitbucket.org/tuprologteam/tuprolog/downloads[TuProlog
+repository]
+
+

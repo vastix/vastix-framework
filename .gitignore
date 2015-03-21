@@ -7,8 +7,6 @@
 .yardopts
 bin/
 build/
-lib/
-libs/
 target/
 project/
 test-output/

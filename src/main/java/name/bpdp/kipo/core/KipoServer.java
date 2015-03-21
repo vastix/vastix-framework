@@ -5,6 +5,9 @@ import io.vertx.ext.apex.Router;
 
 import name.bpdp.kipo.helper.KipoRunner;
 
+// Verticles
+import name.bpdp.kipo.verticles.blazegraph.BlazeGraph;
+
 /*
  * @author <a href="http://bpdp.name">Bambang Purnomosidi</a>
  *
@@ -12,6 +15,7 @@ import name.bpdp.kipo.helper.KipoRunner;
 public class KipoServer extends AbstractVerticle {
 
   public static void main(String[] args) {
+    KipoRunner.runKipo(BlazeGraph.class);
     KipoRunner.runKipo(KipoServer.class);
   }
 

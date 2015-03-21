@@ -19,7 +19,6 @@ public class RunnerUtil {
 	public static void execute(String srcDir, String verticleID, boolean clustered) {
 		System.setProperty("vertx.cwd", srcDir);
 		Consumer<Vertx> runner = vertx -> {
-
 			try {
 				vertx.deployVerticle(verticleID);
 			} catch (Throwable t) {
@@ -27,7 +26,10 @@ public class RunnerUtil {
 			}
 		};
 		if (clustered) {
-			Vertx.clusteredVertx(new VertxOptions().setClustered(true), res -> {
+
+			VertxOptions options = new VertxOptions();
+
+			Vertx.clusteredVertx(options.setClustered(true), res -> {
 				if (res.succeeded()) {
 					Vertx vertx = res.result();
 					runner.accept(vertx);
@@ -39,5 +41,8 @@ public class RunnerUtil {
 			Vertx vertx = Vertx.vertx();
 			runner.accept(vertx);
 		}
+
+		System.out.println("Deploy verticle " + verticleID);
+
 	}
 }

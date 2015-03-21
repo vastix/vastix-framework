@@ -10,7 +10,7 @@ public class KipoRunner {
 	private static final String KIPO_SRC_DIR = "src/main/java/";
 
 	public static void runKipo(Class clazz) {
-		RunnerUtil.runApp(KIPO_SRC_DIR, clazz, false);
+		RunnerUtil.runApp(KIPO_SRC_DIR, clazz, true);
 	}
 
 }

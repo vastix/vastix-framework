@@ -2,12 +2,15 @@ package name.bpdp.kipo.core;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.ext.apex.Router;
-import io.vertx.core.Vertx;
+
+// uncomment to try groovy verticle below
+//import io.vertx.core.Vertx;
 
 import name.bpdp.kipo.helper.KipoRunner;
 
 // Verticles
 import name.bpdp.kipo.verticles.blazegraph.BlazeGraph;
+import name.bpdp.kipo.verticles.prolog.TuProlog;
 
 /*
  * @author <a href="http://bpdp.name">Bambang Purnomosidi</a>
@@ -18,6 +21,7 @@ public class KipoServer extends AbstractVerticle {
   public static void main(String[] args) {
     KipoRunner.runVerticle(KipoServer.class, true);
     KipoRunner.runVerticle(BlazeGraph.class, false);
+    KipoRunner.runVerticle(TuProlog.class, false);
 
 	/* will try to test this whenever @GenIgnore is removed from Vertx.java
 	 * the source code still reside in 

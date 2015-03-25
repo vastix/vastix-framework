@@ -24,7 +24,7 @@ public class KipoServer extends AbstractVerticle {
 	private KipoServer that = this;
 
 	public static void main(String[] args) {
-    	KipoRunner.runVerticle(KipoServer.class, true);
+    	KipoRunner.runVerticle(KipoServer.class, false);
 		KipoRunner.runVerticle(BlazeGraph.class, false);
 		KipoRunner.runVerticle(TuProlog.class, false);
 
@@ -46,8 +46,8 @@ public class KipoServer extends AbstractVerticle {
 
 		Router router = Router.router(vertx);
 
-		router.route().handler(BodyHandler.create());
-		router.route().handler(that::handleHome);
+		//router.route().handler(BodyHandler.create());
+		//router.route().handler(that::handleHome);
 		router.get("/dialog/:messageDlg").handler(that::handleDialog);
 
 		vertx.createHttpServer().requestHandler(router::accept).listen(8080);
@@ -57,7 +57,8 @@ public class KipoServer extends AbstractVerticle {
 	private void handleHome(RoutingContext routingContext) {
 
 		HttpServerResponse response = routingContext.response();
-		response.putHeader("content-type", "text/html").end("Hello World!");
+		response.putHeader("content-type", "text/html");
+		response.end("Hello World!");
 
 	}
 
@@ -67,15 +68,17 @@ public class KipoServer extends AbstractVerticle {
 
 		String messageDlg = routingContext.request().getParam("messageDlg");
 
-		System.out.println(messageDlg);
+		System.out.println("Send " + messageDlg + " to kipo.dialog");
 
 		EventBus evb = vertx.eventBus();
 
 		evb.send("kipo.dialog", messageDlg, ar ->  {
 			if (ar.succeeded()) {
-				response.putHeader("content-type", "text/html").end("Received reply: " + ar.result().body());
+				response.putHeader("content-type", "text/html");
+				response.end("Received reply: " + ar.result().body());
 			} else {
-				response.putHeader("content-type", "text/html").end("Gagal maning son");
+				response.putHeader("content-type", "text/html");
+				response.end("Gagal maning son: " + ar.cause());
 			}
 		});
 

@@ -1,10 +1,13 @@
 package name.bpdp.kipo.core;
 
 import io.vertx.core.AbstractVerticle;
+import io.vertx.core.eventbus.EventBus;
+import io.vertx.core.http.HttpServerResponse;
 import io.vertx.ext.apex.Router;
+import io.vertx.ext.apex.RoutingContext;
+import io.vertx.ext.apex.handler.BodyHandler;
 
-// uncomment to try groovy verticle below
-//import io.vertx.core.Vertx;
+import io.vertx.core.Vertx;
 
 import name.bpdp.kipo.helper.KipoRunner;
 
@@ -18,38 +21,65 @@ import name.bpdp.kipo.verticles.prolog.TuProlog;
  */
 public class KipoServer extends AbstractVerticle {
 
-  public static void main(String[] args) {
-    KipoRunner.runVerticle(KipoServer.class, true);
-    KipoRunner.runVerticle(BlazeGraph.class, false);
-    KipoRunner.runVerticle(TuProlog.class, false);
+	private KipoServer that = this;
 
-	/* will try to test this whenever @GenIgnore is removed from Vertx.java
-	 * the source code still reside in 
-	 * src/main/groovy/name/bpdp/kipo/verticles/dsl/DomainSpecificLanguage.groovy
-	 *
-	 *
-	Vertx vertx = Vertx.vertx();
+	public static void main(String[] args) {
+    	KipoRunner.runVerticle(KipoServer.class, true);
+		KipoRunner.runVerticle(BlazeGraph.class, false);
+		KipoRunner.runVerticle(TuProlog.class, false);
 
-	vertx.deployVerticle("groovy:name.bpdp.kipo.verticles.dsl.DomainSpecificLanguage", res -> {
-		if (res.succeeded()) {
-			System.out.println("Deployment id is: " + res.result());
-		} else {
-			System.out.println("Deployment failed!");
-		}
-	});
-	*/
+		Vertx vertx = Vertx.vertx();
 
-  }
+		vertx.deployVerticle("src/main/groovy/name/bpdp/kipo/verticles/dsl/DomainSpecificLanguage.groovy", res -> {
+			if (res.succeeded()) {
+				System.out.println("Deployment id is: " + res.result());
+			} else {
+				System.out.println("Deployment failed!");
+			}
+		});
 
-  @Override
-  public void start() throws Exception {
 
-    Router router = Router.router(vertx);
+	}
 
-    router.route().handler(routingContext -> {
-      routingContext.response().putHeader("content-type", "text/html").end("Hello World!");
-    });
+	@Override
+	public void start() throws Exception {
 
-    vertx.createHttpServer().requestHandler(router::accept).listen(8080);
-  }
+		Router router = Router.router(vertx);
+
+		router.route().handler(BodyHandler.create());
+		router.route().handler(that::handleHome);
+		router.get("/dialog/:messageDlg").handler(that::handleDialog);
+
+		vertx.createHttpServer().requestHandler(router::accept).listen(8080);
+
+	}
+
+	private void handleHome(RoutingContext routingContext) {
+
+		HttpServerResponse response = routingContext.response();
+		response.putHeader("content-type", "text/html").end("Hello World!");
+
+	}
+
+	private void handleDialog(RoutingContext routingContext) {
+
+		HttpServerResponse response = routingContext.response();
+
+		String messageDlg = routingContext.request().getParam("messageDlg");
+
+		System.out.println(messageDlg);
+
+		EventBus evb = vertx.eventBus();
+
+		evb.send("kipo.dialog", messageDlg, ar ->  {
+			if (ar.succeeded()) {
+				response.putHeader("content-type", "text/html").end("Received reply: " + ar.result().body());
+			} else {
+				response.putHeader("content-type", "text/html").end("Gagal maning son");
+			}
+		});
+
+	}
+
+
 }

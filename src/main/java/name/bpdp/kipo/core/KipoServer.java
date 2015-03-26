@@ -6,8 +6,10 @@ import io.vertx.core.http.HttpServerResponse;
 import io.vertx.ext.apex.Router;
 import io.vertx.ext.apex.RoutingContext;
 import io.vertx.ext.apex.handler.BodyHandler;
+import java.util.function.Consumer;
 
 import io.vertx.core.Vertx;
+import io.vertx.core.VertxOptions;
 
 import name.bpdp.kipo.helper.KipoRunner;
 
@@ -24,11 +26,33 @@ public class KipoServer extends AbstractVerticle {
 	private KipoServer that = this;
 
 	public static void main(String[] args) {
-    	KipoRunner.runVerticle(KipoServer.class, false);
-		KipoRunner.runVerticle(BlazeGraph.class, false);
-		KipoRunner.runVerticle(TuProlog.class, false);
+    	KipoRunner.runVerticle(KipoServer.class, true);
+//		KipoRunner.runVerticle(BlazeGraph.class, false);
+//		KipoRunner.runVerticle(TuProlog.class, false);
 
+
+		Consumer<Vertx> runner = vertx -> {
+			try {
+				vertx.deployVerticle("src/main/groovy/name/bpdp/kipo/verticles/dsl/DomainSpecificLanguage.groovy");
+			} catch (Throwable t) {
+				t.printStackTrace();
+			}
+		};
+		Vertx.clusteredVertx(new VertxOptions().setClustered(true), res -> {
+			if (res.succeeded()) {
+				Vertx vertx = res.result();
+				runner.accept(vertx);
+			} else {
+				res.cause().printStackTrace();
+			}
+		});
+
+
+
+		/*
 		Vertx vertx = Vertx.vertx();
+
+		VertxOptions options = new VertxOptions();
 
 		vertx.deployVerticle("src/main/groovy/name/bpdp/kipo/verticles/dsl/DomainSpecificLanguage.groovy", res -> {
 			if (res.succeeded()) {
@@ -37,7 +61,7 @@ public class KipoServer extends AbstractVerticle {
 				System.out.println("Deployment failed!");
 			}
 		});
-
+		*/
 
 	}
 

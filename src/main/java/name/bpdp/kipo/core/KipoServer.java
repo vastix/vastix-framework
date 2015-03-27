@@ -31,42 +31,11 @@ public class KipoServer extends AbstractVerticle {
 	private KipoServer that = this;
 
 	public static void main(String[] args) {
-    	KipoRunner.runVerticle(KipoServer.class, true);
-//		KipoRunner.runVerticle(BlazeGraph.class, false);
-//		KipoRunner.runVerticle(TuProlog.class, false);
+    	KipoRunner.runJavaVerticle(KipoServer.class, true);
+//		KipoRunner.runJavaVerticle(BlazeGraph.class, true);
+//		KipoRunner.runJavaVerticle(TuProlog.class, true);
 
-
-		Consumer<Vertx> runner = vertx -> {
-			try {
-				vertx.deployVerticle("src/main/groovy/name/bpdp/kipo/verticles/dsl/DomainSpecificLanguage.groovy");
-			} catch (Throwable t) {
-				t.printStackTrace();
-			}
-		};
-		Vertx.clusteredVertx(new VertxOptions().setClustered(true), res -> {
-			if (res.succeeded()) {
-				Vertx vertx = res.result();
-				runner.accept(vertx);
-			} else {
-				res.cause().printStackTrace();
-			}
-		});
-
-
-
-		/*
-		Vertx vertx = Vertx.vertx();
-
-		VertxOptions options = new VertxOptions();
-
-		vertx.deployVerticle("src/main/groovy/name/bpdp/kipo/verticles/dsl/DomainSpecificLanguage.groovy", res -> {
-			if (res.succeeded()) {
-				System.out.println("Deployment id is: " + res.result());
-			} else {
-				System.out.println("Deployment failed!");
-			}
-		});
-		*/
+		KipoRunner.runGroovyVerticle("name.bpdp.kipo.verticles.dsl.DomainSpecificLanguage", true);
 
 	}
 
@@ -89,11 +58,12 @@ public class KipoServer extends AbstractVerticle {
 		// Route all GET requests for resource ending in .hbs to the template handler
 		router.getWithRegex(".+\\.tl").handler(thandler);
 
+		// for dialog between machinge
+		// This should be the first route
+		router.get("/dialog/:messageDlg").handler(that::handleDialog);
+
 		// for static content, it will take webroot/index.html
 		router.route().handler(StaticHandler.create());
-
-		// for dialog between machinge
-		router.get("/dialog/:messageDlg").handler(that::handleDialog);
 
 		vertx.createHttpServer().requestHandler(router::accept).listen(8080);
 

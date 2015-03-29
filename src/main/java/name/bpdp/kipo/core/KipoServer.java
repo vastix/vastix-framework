@@ -32,7 +32,7 @@ public class KipoServer extends AbstractVerticle {
 
 	public static void main(String[] args) {
     	KipoRunner.runJavaVerticle(KipoServer.class, true);
-//		KipoRunner.runJavaVerticle(BlazeGraph.class, true);
+		KipoRunner.runJavaVerticle(BlazeGraph.class, true);
 //		KipoRunner.runJavaVerticle(TuProlog.class, true);
 
 		KipoRunner.runGroovyVerticle("name.bpdp.kipo.verticles.dsl.DomainSpecificLanguage", true);

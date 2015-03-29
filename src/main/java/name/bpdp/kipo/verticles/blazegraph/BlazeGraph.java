@@ -2,6 +2,11 @@ package name.bpdp.kipo.verticles.blazegraph;
 
 import io.vertx.core.AbstractVerticle;
 
+import name.bpdp.kipo.verticles.blazegraph.SparqlEndpoint;
+
+import java.util.Map;
+import java.util.LinkedHashMap;
+
 import com.bigdata.journal.IIndexManager;
 import com.bigdata.rdf.sail.BigdataSail;
 
@@ -35,7 +40,8 @@ public class BlazeGraph extends AbstractVerticle {
 
             final Map<String, String> initParams = new LinkedHashMap<String, String>();
 
-            SparqlEndpoint(port, indexManager, initParams).run();
+            SparqlEndpoint spe = new SparqlEndpoint(port, indexManager, initParams);
+			spe.run();
 
         } finally {
 

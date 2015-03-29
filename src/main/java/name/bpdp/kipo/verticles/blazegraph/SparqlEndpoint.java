@@ -1,3 +1,5 @@
+package name.bpdp.kipo.verticles.blazegraph;
+
 import org.eclipse.jetty.server.Server;
 import com.bigdata.journal.IIndexManager;
 import com.bigdata.rdf.sail.webapp.NanoSparqlServer;
@@ -27,7 +29,6 @@ public class SparqlEndpoint {
 
 	}
 
-	@Override
 	public void run() throws Exception {
 
 		Server server = null;
@@ -42,7 +43,8 @@ public class SparqlEndpoint {
             
 		} catch (Throwable t) {
 
-			log.error(t, t);
+			//log.error(t, t);
+			System.out.println("Error: " + t);
 
 		} finally {
 
@@ -54,7 +56,8 @@ public class SparqlEndpoint {
 
 				} catch (Exception e) {
 
-					log.error(e, e);
+					//log.error(e, e);
+					System.out.println("Error: " + e);
 
 				}
 

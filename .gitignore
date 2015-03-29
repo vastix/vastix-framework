@@ -7,6 +7,7 @@
 .yardopts
 bin/
 build/
+db/
 target/
 project/
 test-output/
@@ -20,5 +21,6 @@ test-tmp/
 *.iml
 *.ipr
 *.iws
+*.jnl
 .nb-gradle/
 /.nb-gradle/private/

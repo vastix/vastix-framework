@@ -50,10 +50,14 @@ repositories {
 }
 
 dependencies {
-	compile 'org.eclipse.jetty:jetty-server:9.2.10.v20150310'
-	compile 'org.eclipse.jetty:jetty-xml:9.2.10.v20150310'
-	compile 'org.eclipse.jetty:jetty-webapp:9.2.10.v20150310'
-	compile 'org.eclipse.jetty:jetty-proxy:9.2.10.v20150310'
+	// jetty needed by blazaegraph for SPARQL endpoint
+	// currently cancelled, need to understand jetty
+	// internal working since it blocks everything
+	//compile 'org.eclipse.jetty:jetty-server:9.2.10.v20150310'
+	//compile 'org.eclipse.jetty:jetty-xml:9.2.10.v20150310'
+	//compile 'org.eclipse.jetty:jetty-webapp:9.2.10.v20150310'
+	//compile 'org.eclipse.jetty:jetty-proxy:9.2.10.v20150310'
+	// ------------------------------------------------------
 	compile 'io.vertx:vertx-core:' + vertxVersion
 	compile 'io.vertx:vertx-apex:' + vertxVersion
 	compile 'io.vertx:vertx-codetrans:' + vertxVersion

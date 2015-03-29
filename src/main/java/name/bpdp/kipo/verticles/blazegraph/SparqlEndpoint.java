@@ -1,12 +1,17 @@
+/* Canclled
 package name.bpdp.kipo.verticles.blazegraph;
 
 import org.eclipse.jetty.server.Server;
 import com.bigdata.journal.IIndexManager;
 import com.bigdata.rdf.sail.webapp.NanoSparqlServer;
 
+import org.apache.log4j.Logger;
+
 import java.util.Map;
 
 public class SparqlEndpoint {
+
+    private static final Logger log = Logger.getLogger(SparqlEndpoint.class);
 
 	private int port;
 	private final IIndexManager indexManager;
@@ -17,6 +22,8 @@ public class SparqlEndpoint {
 	* @param port
 	*            The desired port -or- ZERO (0) to use a random open port.
 	*/
+
+	/* cancelled
 	public SparqlEndpoint (final int port, final IIndexManager indexManager, final Map<String, String> initParams) {
         
 		if (indexManager == null) throw new IllegalArgumentException();
@@ -43,8 +50,7 @@ public class SparqlEndpoint {
             
 		} catch (Throwable t) {
 
-			//log.error(t, t);
-			System.out.println("Error: " + t);
+			log.error(t, t);
 
 		} finally {
 
@@ -56,8 +62,7 @@ public class SparqlEndpoint {
 
 				} catch (Exception e) {
 
-					//log.error(e, e);
-					System.out.println("Error: " + e);
+					log.error(e, e);
 
 				}
 
@@ -72,3 +77,4 @@ public class SparqlEndpoint {
 	}
 
 }
+*/

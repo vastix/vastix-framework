@@ -17,15 +17,15 @@ class DomainSpecificLanguage extends GroovyVerticle {
 		def consumer = eb.consumer("kipo.dialog")
 
 		consumer.handler({ message ->
-			println("I have received a message: ${message.body()}")
-			message.reply("how interesting!")
+			println("A message was received by kipo.dialog: ${message.body()}")
+			message.reply("Reply from kipo.dialog!")
 		})
 
 		consumer.completionHandler({ res ->
 			if (res.succeeded()) {
-				println("The handler registration has reached all nodes")
+				println("The handler registration for kipo.dialog has reached all nodes")
 			} else {
-				println("Registration failed!")
+				println("Kipo.dialog registration failed!")
 			}
 		})
 	}

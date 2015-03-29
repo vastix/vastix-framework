@@ -62,6 +62,9 @@ public class KipoServer extends AbstractVerticle {
 		// This should be the first route
 		router.get("/dialog/:messageDlg").handler(that::handleDialog);
 
+		// SPARQL endpoint - REST
+		router.get("/sparql/:sparqlQuery").handler(that::handleSparql);
+
 		// for static content, it will take webroot/index.html
 		router.route().handler(StaticHandler.create());
 
@@ -97,7 +100,29 @@ public class KipoServer extends AbstractVerticle {
 			}
 		});
 
+
 	}
 
+	private void handleSparql(RoutingContext routingContext) {
+
+		HttpServerResponse response = routingContext.response();
+
+		String sparqlQuery = routingContext.request().getParam("sparqlQuery");
+
+		System.out.println("Send " + sparqlQuery + " to kipo.blazegraph");
+
+		EventBus evb = vertx.eventBus();
+
+		evb.send("kipo.blazegraph", sparqlQuery, ar ->  {
+			if (ar.succeeded()) {
+				response.putHeader("content-type", "text/html");
+				response.end("Received reply: " + ar.result().body());
+			} else {
+				response.putHeader("content-type", "text/html");
+				response.end("Gagal maning son: " + ar.cause());
+			}
+		});
+
+	}
 
 }

@@ -50,6 +50,7 @@ repositories {
 }
 
 dependencies {
+	compile 'org.eclipse.jetty:jetty-server:9.2.10.v20150310'
 	compile 'io.vertx:vertx-core:' + vertxVersion
 	compile 'io.vertx:vertx-apex:' + vertxVersion
 	compile 'io.vertx:vertx-codetrans:' + vertxVersion

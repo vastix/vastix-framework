@@ -10,7 +10,13 @@ import io.vertx.core.eventbus.MessageConsumer;
 
 import java.util.Map;
 import java.util.LinkedHashMap;
+import java.util.Properties;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.BufferedInputStream;
+import org.openrdf.repository.Repository;
 
+import com.bigdata.rdf.sail.BigdataSailRepository;
 import com.bigdata.journal.IIndexManager;
 import com.bigdata.rdf.sail.BigdataSail;
 
@@ -22,6 +28,29 @@ import com.bigdata.rdf.sail.BigdataSail;
  *
  */
 public class BlazeGraph extends AbstractVerticle {
+
+	/**
+	* Load a Properties object from a file.
+	* 
+	* @param resource
+	* @return
+	* @throws Exception
+	*/
+
+	private Properties loadProperties(String resource) throws Exception {
+
+		System.out.println("1\n");
+		Properties p = new Properties();
+
+		System.out.println("2\n");
+		InputStream is = getClass().getResourceAsStream(resource);
+
+		System.out.println("3\n");
+		p.load(new InputStreamReader(new BufferedInputStream(is)));
+		System.out.println("4\n");
+		return p;
+	}
+
 
 	@Override
 	public void start() throws Exception {
@@ -36,9 +65,13 @@ public class BlazeGraph extends AbstractVerticle {
          * configuration properties. There are other constructors that allow you
          * to take more control over this process.
          */
-        final BigdataSail sail = new BigdataSail();
 
-        sail.initialize();
+		Properties bgProperties = this.loadProperties("src/resources/RWStore.properties");
+
+        final BigdataSail sail = new BigdataSail(bgProperties);
+		Repository repo = new BigdataSailRepository(sail);
+
+        repo.initialize();
 
 		/* SPARQL endpoint is cancelled because of its blocking feature
         try {

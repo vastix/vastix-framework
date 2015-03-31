@@ -8,17 +8,21 @@ import io.vertx.core.eventbus.MessageConsumer;
 // cancelled
 //import name.bpdp.kipo.verticles.blazegraph.SparqlEndpoint;
 
+import java.io.FileNotFoundException;
+
 import java.util.Map;
 import java.util.LinkedHashMap;
 import java.util.Properties;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.BufferedInputStream;
+//import java.io.InputStream;
+//import java.io.InputStreamReader;
+//import java.io.BufferedInputStream;
 import org.openrdf.repository.Repository;
 
 import com.bigdata.rdf.sail.BigdataSailRepository;
 import com.bigdata.journal.IIndexManager;
 import com.bigdata.rdf.sail.BigdataSail;
+
+import name.bpdp.kipo.helper.KipoProperties;
 
 // for SPARQL endpoint - cancelled
 //import org.eclipse.jetty.server.Server;
@@ -28,28 +32,6 @@ import com.bigdata.rdf.sail.BigdataSail;
  *
  */
 public class BlazeGraph extends AbstractVerticle {
-
-	/**
-	* Load a Properties object from a file.
-	* 
-	* @param resource
-	* @return
-	* @throws Exception
-	*/
-
-	private Properties loadProperties(String resource) throws Exception {
-
-		System.out.println("1\n");
-		Properties p = new Properties();
-
-		System.out.println("2\n");
-		InputStream is = getClass().getResourceAsStream(resource);
-
-		System.out.println("3\n");
-		p.load(new InputStreamReader(new BufferedInputStream(is)));
-		System.out.println("4\n");
-		return p;
-	}
 
 
 	@Override
@@ -66,9 +48,12 @@ public class BlazeGraph extends AbstractVerticle {
          * to take more control over this process.
          */
 
-		Properties bgProperties = this.loadProperties("src/resources/RWStore.properties");
+		Properties blazeProp;
 
-        final BigdataSail sail = new BigdataSail(bgProperties);
+		KipoProperties bgProperties = new KipoProperties();
+		blazeProp = bgProperties.loadProperties("RWStore.properties");
+
+        final BigdataSail sail = new BigdataSail(blazeProp);
 		Repository repo = new BigdataSailRepository(sail);
 
         repo.initialize();

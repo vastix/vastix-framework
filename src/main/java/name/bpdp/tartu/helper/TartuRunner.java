@@ -1,11 +1,11 @@
-package name.bpdp.kipo.helper;
+package name.bpdp.tartu.helper;
 
-import name.bpdp.kipo.helper.RunnerUtil;
+import name.bpdp.tartu.helper.RunnerUtil;
 
 /*
  * @author <a href="http://tfox.org">Tim Fox</a>
  */
-public class KipoRunner {
+public class TartuRunner {
 
 	private static final String KIPO_JAVA_SRC_DIR = "src/main/java/";
 	private static final String KIPO_GROOVY_SRC_DIR = "src/main/groovy/";

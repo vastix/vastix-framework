@@ -1,4 +1,4 @@
-package name.bpdp.kipo.helper;
+package name.bpdp.tartu.helper;
 
 import java.io.FileNotFoundException;
 import java.util.Properties;
@@ -6,7 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.BufferedInputStream;
 
-public class KipoProperties {
+public class TartuProperties {
 
 	/**
 	* Load a Properties object from a file.

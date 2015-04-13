@@ -1,4 +1,4 @@
-package name.bpdp.kipo.core;
+package name.bpdp.tartu.core;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.eventbus.EventBus;
@@ -16,26 +16,47 @@ import io.vertx.ext.apex.templ.TemplateEngine;
 import io.vertx.ext.apex.handler.TemplateHandler;
 import io.vertx.ext.apex.templ.ThymeleafTemplateEngine;
 
-import name.bpdp.kipo.helper.KipoRunner;
-
+import name.bpdp.tartu.helper.TartuRunner;
+import name.bpdp.vertx.blazegraph.BlazegraphServiceVerticle;
+import name.bpdp.vertx.blazegraph.BlazegraphService;
 // Verticles
-import name.bpdp.kipo.verticles.blazegraph.BlazeGraph;
-import name.bpdp.kipo.verticles.prolog.TuProlog;
+//import name.bpdp.tartu.verticles.blazegraph.BlazeGraph;
+//import name.bpdp.tartu.verticles.prolog.TuProlog;
+
+import io.vertx.core.Vertx;
+import io.vertx.core.json.JsonObject;
+import io.vertx.core.DeploymentOptions;
 
 /*
  * @author <a href="http://bpdp.name">Bambang Purnomosidi</a>
  *
  */
-public class KipoServer extends AbstractVerticle {
+public class TartuServer extends AbstractVerticle {
 
-	private KipoServer that = this;
+	private TartuServer that = this;
 
 	public static void main(String[] args) {
-    	KipoRunner.runJavaVerticle(KipoServer.class, true);
-		KipoRunner.runJavaVerticle(BlazeGraph.class, true);
+    	TartuRunner.runJavaVerticle(TartuServer.class, true);
+//		KipoRunner.runJavaVerticle(BlazeGraph.class, true);
 //		KipoRunner.runJavaVerticle(TuProlog.class, true);
 
-		KipoRunner.runGroovyVerticle("name.bpdp.kipo.verticles.dsl.DomainSpecificLanguage", true);
+		Vertx vertx = Vertx.vertx();
+
+		JsonObject config = new JsonObject().put("address", "tartu.blazegraph");
+		DeploymentOptions depOptions = new DeploymentOptions().setConfig(config);
+
+		vertx.deployVerticle("service:name.bpdp.blazegraph-service", depOptions, res -> {
+			if (res.succeeded()) {
+				System.out.println("Start service - succeed");
+			} else {
+				System.out.println("Start service - failed");
+			}
+		});
+
+		TartuRunner.runGroovyVerticle("name.bpdp.tartu.verticles.dsl.DomainSpecificLanguage", true);
+
+		BlazegraphService bgsvcs = BlazegraphService.createProxy(vertx, "proxy.tartu.blazegraph");
+		bgsvcs.save("Hwarakadah!");
 
 	}
 
@@ -63,7 +84,7 @@ public class KipoServer extends AbstractVerticle {
 		router.get("/dialog/:messageDlg").handler(that::handleDialog);
 
 		// SPARQL endpoint - REST
-		router.get("/sparql/:sparqlQuery").handler(that::handleSparql);
+		//router.get("/sparql/:sparqlQuery").handler(that::handleSparql);
 
 		// for static content, it will take webroot/index.html
 		router.route().handler(StaticHandler.create());
@@ -86,11 +107,11 @@ public class KipoServer extends AbstractVerticle {
 
 		String messageDlg = routingContext.request().getParam("messageDlg");
 
-		System.out.println("Send " + messageDlg + " to kipo.dialog");
+		System.out.println("Send " + messageDlg + " to tartu.dialog");
 
 		EventBus evb = vertx.eventBus();
 
-		evb.send("kipo.dialog", messageDlg, ar ->  {
+		evb.send("tartu.dialog", messageDlg, ar ->  {
 			if (ar.succeeded()) {
 				response.putHeader("content-type", "text/html");
 				response.end("Received reply: " + ar.result().body());
@@ -103,6 +124,7 @@ public class KipoServer extends AbstractVerticle {
 
 	}
 
+	/*
 	private void handleSparql(RoutingContext routingContext) {
 
 		HttpServerResponse response = routingContext.response();
@@ -124,5 +146,5 @@ public class KipoServer extends AbstractVerticle {
 		});
 
 	}
-
+	*/
 }

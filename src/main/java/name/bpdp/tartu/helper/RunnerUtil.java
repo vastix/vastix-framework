@@ -1,4 +1,4 @@
-package name.bpdp.kipo.helper;
+package name.bpdp.tartu.helper;
 
 import io.vertx.core.Vertx;
 import io.vertx.core.VertxOptions;

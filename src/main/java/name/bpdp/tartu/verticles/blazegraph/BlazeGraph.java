@@ -1,4 +1,4 @@
-package name.bpdp.kipo.verticles.blazegraph;
+package name.bpdp.tartu.verticles.blazegraph;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Vertx;
@@ -22,7 +22,7 @@ import com.bigdata.rdf.sail.BigdataSailRepository;
 import com.bigdata.journal.IIndexManager;
 import com.bigdata.rdf.sail.BigdataSail;
 
-import name.bpdp.kipo.helper.KipoProperties;
+import name.bpdp.tartu.helper.TartuProperties;
 
 // for SPARQL endpoint - cancelled
 //import org.eclipse.jetty.server.Server;
@@ -50,7 +50,7 @@ public class BlazeGraph extends AbstractVerticle {
 
 		Properties blazeProp;
 
-		KipoProperties bgProperties = new KipoProperties();
+		TartuProperties bgProperties = new TartuProperties();
 		blazeProp = bgProperties.loadProperties("RWStore.properties");
 
         final BigdataSail sail = new BigdataSail(blazeProp);
@@ -76,10 +76,10 @@ public class BlazeGraph extends AbstractVerticle {
 
 		EventBus eb = vertx.eventBus();
 
-		MessageConsumer<String> consumer = eb.consumer("kipo.blazegraph");
+		MessageConsumer<String> consumer = eb.consumer("tartu.blazegraph");
 		consumer.handler(message -> {
 			System.out.println("Blazegraph has received a message: " + message.body());
-			message.reply("Reply from kipo.blazegraph!");
+			message.reply("Reply from tartu.blazegraph!");
 		});
 
 		consumer.completionHandler(res -> {

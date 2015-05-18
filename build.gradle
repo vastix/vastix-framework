@@ -22,7 +22,7 @@ apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: 'org.asciidoctor.convert'
 apply plugin: 'application'
 
-def vertxVersion = '3.0.0-milestone4'
+def vertxVersion = '3.0.0-milestone5'
 version = '1.0.0-SNAPSHOT'
 
 sourceCompatibility = 1.8 
@@ -50,14 +50,6 @@ repositories {
 }
 
 dependencies {
-	// jetty needed by blazaegraph for SPARQL endpoint
-	// currently cancelled, need to understand jetty
-	// internal working since it blocks everything
-	//compile 'org.eclipse.jetty:jetty-server:9.2.10.v20150310'
-	//compile 'org.eclipse.jetty:jetty-xml:9.2.10.v20150310'
-	//compile 'org.eclipse.jetty:jetty-webapp:9.2.10.v20150310'
-	//compile 'org.eclipse.jetty:jetty-proxy:9.2.10.v20150310'
-	// ------------------------------------------------------
 	compile 'io.vertx:vertx-core:' + vertxVersion
 	compile 'io.vertx:vertx-apex:' + vertxVersion
 	compile 'io.vertx:vertx-codetrans:' + vertxVersion
@@ -83,7 +75,7 @@ shadowJar {
 }
 
 task wrapper(type: Wrapper) {
-	gradleVersion = '2.3'
+	gradleVersion = '2.4'
 }
 
-mainClassName = 'name.bpdp.tartu.core.TartuServer'
+mainClassName = 'name.bpdp.vastix.core.VastixServer'

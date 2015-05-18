@@ -55,9 +55,6 @@ public class TartuServer extends AbstractVerticle {
 
 		TartuRunner.runGroovyVerticle("name.bpdp.tartu.verticles.dsl.DomainSpecificLanguage", true);
 
-		BlazegraphService bgsvcs = BlazegraphService.createProxy(vertx, "proxy.tartu.blazegraph");
-		bgsvcs.save("Hwarakadah!");
-
 	}
 
 	@Override
@@ -84,7 +81,7 @@ public class TartuServer extends AbstractVerticle {
 		router.get("/dialog/:messageDlg").handler(that::handleDialog);
 
 		// SPARQL endpoint - REST
-		//router.get("/sparql/:sparqlQuery").handler(that::handleSparql);
+		router.get("/sparql/:sparqlQuery").handler(that::handleSparql);
 
 		// for static content, it will take webroot/index.html
 		router.route().handler(StaticHandler.create());
@@ -124,18 +121,29 @@ public class TartuServer extends AbstractVerticle {
 
 	}
 
-	/*
 	private void handleSparql(RoutingContext routingContext) {
+
+		/*
+		Vertx vertx = Vertx.vertx();
+		*/
 
 		HttpServerResponse response = routingContext.response();
 
 		String sparqlQuery = routingContext.request().getParam("sparqlQuery");
 
-		System.out.println("Send " + sparqlQuery + " to kipo.blazegraph");
+		System.out.println("Send " + sparqlQuery + " to tartu.blazegraph");
 
+		BlazegraphService bgsvcs = BlazegraphService.createProxy(vertx, "tartu.blazegraph");
+		bgsvcs.save(sparqlQuery);
+
+		response.putHeader("content-type", "text/html");
+		response.end("Send " + sparqlQuery + " to tartu.blazegraph");
+
+
+		/*
 		EventBus evb = vertx.eventBus();
 
-		evb.send("kipo.blazegraph", sparqlQuery, ar ->  {
+		evb.send("tartu.blazegraph", sparqlQuery, ar ->  {
 			if (ar.succeeded()) {
 				response.putHeader("content-type", "text/html");
 				response.end("Received reply: " + ar.result().body());
@@ -144,7 +152,7 @@ public class TartuServer extends AbstractVerticle {
 				response.end("Gagal maning son: " + ar.cause());
 			}
 		});
+		*/
 
 	}
-	*/
 }

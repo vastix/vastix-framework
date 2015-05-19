@@ -1,4 +1,4 @@
-= Kipo FAQ
+= Vastix FAQ
 
 This is the place where you will get answer for simple question and
 overview.

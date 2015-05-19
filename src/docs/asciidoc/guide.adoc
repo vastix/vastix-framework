@@ -1,4 +1,4 @@
-= Kipo Guide
+= Vastix Guide
 
-Well, you -- the Web developers -- are going to need this
+Well, you -- the developers -- are going to need this
 documentation. 

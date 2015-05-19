@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: io.vertx:vertx-service-factory:3.0.0-milestone4">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.vertx/vertx-service-factory/3.0.0-milestone4/4ea4458cd5efce48cc7a44e3f6342d4a6ed87362/vertx-service-factory-3.0.0-milestone4.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.vertx/vertx-service-factory/3.0.0-milestone4/a3aa133474b8d6558f669da63070067b1af99ab9/vertx-service-factory-3.0.0-milestone4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,9 +1,9 @@
-= Kipo Central Documentation
-Bambang Purnomosidi D. P. <bpurnomo@akakom.ac.id>
-v0.0.1, 2015-03
+= Vastix Central Documentation
+Bambang Purnomosidi D. P. <me@bpdp.name>
+v0.0.1, 2015-05
 :doctype: book
 
-Hello and welcome to Kipo. First, a notice. This documentation is
+Hello and welcome to Vastix. First, a notice. This documentation is
 still in progress, therefore, it constantly evolving. This
 documentation is divided into some parts.
 

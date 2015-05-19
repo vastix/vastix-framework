@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Gradle: com.ibm.icu:icu4j-charset:4.8">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/ibm/icu/icu4j-charset/4.8/icu4j-charset-4.8.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: io.vertx:vertx-apex:3.0.0-milestone5">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.vertx/vertx-apex/3.0.0-milestone5/77ea721b9d6390fd6e14e47023895e4fb73084b7/vertx-apex-3.0.0-milestone5.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.vertx/vertx-apex/3.0.0-milestone5/c11f3457749209d615622c70e94f5b16188bfb47/vertx-apex-3.0.0-milestone5-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

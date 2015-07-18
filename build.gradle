@@ -1,12 +1,12 @@
 buildscript {
     repositories { jcenter() }
     dependencies {
-        classpath	'com.github.jengelman.gradle.plugins:shadow:1.1.1',
-					'com.github.jengelman.gradle.plugins:shadow:1.2.1',
-					// asciidoc gradle plugin
-					// http://asciidoctor.org/docs/asciidoctor-gradle-plugin/
-                    'org.asciidoctor:asciidoctor-gradle-plugin:1.5.2'
-	}
+        classpath 'com.github.jengelman.gradle.plugins:shadow:1.1.1',
+            'com.github.jengelman.gradle.plugins:shadow:1.2.1',
+            // asciidoc gradle plugin
+            // http://asciidoctor.org/docs/asciidoctor-gradle-plugin/
+            'org.asciidoctor:asciidoctor-gradle-plugin:1.5.2'
+    }
 }
 
 apply plugin: 'java'
@@ -22,8 +22,8 @@ apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: 'org.asciidoctor.convert'
 apply plugin: 'application'
 
-def vertxVersion = '3.0.0-milestone5'
-version = '1.0.0-SNAPSHOT'
+def vertxVersion = '3.0.0'
+version = '1.0.0'
 
 sourceCompatibility = 1.8 
 targetCompatibility = 1.8 
@@ -39,13 +39,11 @@ if (!JavaVersion.current().java8Compatible) {
 
 repositories {
     mavenCentral()
-    maven {
-        url = 'http://oss.sonatype.org/content/repositories/snapshots/'
-    }
+    maven { url 'http://oss.sonatype.org/content/repositories/snapshots' }
+    maven { url 'http://www.systap.com/maven/releases' }
+    maven { url 'http://nexus.bedatadriven.com/content/groups/public' }
     jcenter()
-    mavenCentral()
     mavenLocal()
-    maven {url "http://www.systap.com/maven/releases"}
     flatDir {
         dirs 'lib'
     }
@@ -53,23 +51,24 @@ repositories {
 
 dependencies {
     compile 'io.vertx:vertx-core:' + vertxVersion
-    compile 'io.vertx:vertx-apex:' + vertxVersion
+    compile 'io.vertx:vertx-web:' + vertxVersion
     compile 'io.vertx:vertx-codetrans:' + vertxVersion
-    compile 'io.vertx:vertx-auth-service:' + vertxVersion
+    compile 'io.vertx:vertx-auth:' + vertxVersion
     compile 'io.vertx:vertx-hazelcast:' + vertxVersion
     compile 'io.vertx:vertx-lang-groovy:' + vertxVersion
     compile 'com.github.jknack:handlebars:1.3.0'
     compile 'org.thymeleaf:thymeleaf:2.1.4.RELEASE'
     compile fileTree(dir: 'lib', include: '*.jar')
     compile 'com.bigdata:bigdata:1.5.1'
-    compile 'name.bpdp.vertx:blazegraph-service:1.0.0-SNAPSHOT'
+    compile 'name.bpdp.vertx:blazegraph-service:1.0.0'
+    compile 'org.renjin:renjin-script-engine:0.7.1548'
     testCompile 'junit:junit:4.12'
 }
 
 shadowJar {
     classifier = 'fat'
     manifest {
-        attributes 'Main-Class': 'name.bpdp.vastix.core.TartuServer'
+        attributes 'Main-Class': 'name.bpdp.vastix.core.VastixServer'
     }
     mergeServiceFiles {
         include 'META-INF/services/io.vertx.core.spi.VerticleFactory'
@@ -77,7 +76,7 @@ shadowJar {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.4'
+    gradleVersion = '2.5'
 }
 
 mainClassName = 'name.bpdp.vastix.core.VastixServer'

@@ -16,7 +16,7 @@ import org.openrdf.repository.Repository;
 import com.bigdata.rdf.sail.BigdataSailRepository;
 import com.bigdata.rdf.sail.BigdataSail;
 
-import name.bpdp.vastix.helper.TartuProperties;
+import name.bpdp.vastix.helper.VastixProperties;
 
 // for SPARQL endpoint - cancelled
 //import org.eclipse.jetty.server.Server;
@@ -44,7 +44,7 @@ public class BlazeGraph extends AbstractVerticle {
 
 		Properties blazeProp;
 
-		TartuProperties bgProperties = new TartuProperties();
+		VastixProperties bgProperties = new VastixProperties();
 		blazeProp = bgProperties.loadProperties("RWStore.properties");
 
         final BigdataSail sail = new BigdataSail(blazeProp);

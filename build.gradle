@@ -59,7 +59,7 @@ dependencies {
     compile 'com.github.jknack:handlebars:1.3.0'
     compile 'org.thymeleaf:thymeleaf:2.1.4.RELEASE'
     compile fileTree(dir: 'lib', include: '*.jar')
-    compile 'com.bigdata:bigdata:1.5.1'
+    compile 'com.bigdata:bigdata:1.5.2'
     compile 'name.bpdp.vertx:blazegraph-service:1.0.0'
     compile 'org.renjin:renjin-script-engine:0.7.1548'
     testCompile 'junit:junit:4.12'

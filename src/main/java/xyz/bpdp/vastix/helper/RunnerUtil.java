@@ -1,4 +1,4 @@
-package name.bpdp.vastix.helper;
+package xyz.bpdp.vastix.helper;
 
 import io.vertx.core.Vertx;
 import io.vertx.core.VertxOptions;

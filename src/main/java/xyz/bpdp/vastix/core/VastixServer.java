@@ -1,4 +1,4 @@
-package name.bpdp.vastix.core;
+package xyz.bpdp.vastix.core;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.eventbus.EventBus;
@@ -13,8 +13,8 @@ import io.vertx.ext.web.templ.TemplateEngine;
 import io.vertx.ext.web.handler.TemplateHandler;
 import io.vertx.ext.web.templ.ThymeleafTemplateEngine;
 
-import name.bpdp.vastix.helper.VastixRunner;
-import name.bpdp.vertx.blazegraph.BlazegraphService;
+import xyz.bpdp.vastix.helper.VastixRunner;
+import xyz.bpdp.vertx.blazegraph.BlazegraphService;
 // Verticles
 //import name.bpdp.vastix.verticles.blazegraph.BlazeGraph;
 //import name.bpdp.vastix.verticles.prolog.TuProlog;
@@ -23,7 +23,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.core.DeploymentOptions;
 
 /*
- * @author <a href="http://bpdp.name">Bambang Purnomosidi</a>
+ * @author <a href="http://bpdp.xyz">Bambang Purnomosidi</a>
  *
  */
 public class VastixServer extends AbstractVerticle {
@@ -41,7 +41,7 @@ public class VastixServer extends AbstractVerticle {
 	    JsonObject config = new JsonObject().put("address", "vastix.blazegraph");
     	DeploymentOptions depOptions = new DeploymentOptions().setConfig(config);
 
-    	vertx.deployVerticle("service:name.bpdp.blazegraph-service", depOptions, res -> {
+    	vertx.deployVerticle("service:xyz.bpdp.blazegraph-service", depOptions, res -> {
             if (res.succeeded()) {
                 System.out.println("Start service - succeed");
             } else {
@@ -49,7 +49,7 @@ public class VastixServer extends AbstractVerticle {
             }
 	    });
 
-	    VastixRunner.runGroovyVerticle("name.bpdp.vastix.verticles.dsl.DomainSpecificLanguage", true);
+	    VastixRunner.runGroovyVerticle("xyz.bpdp.vastix.verticles.dsl.DomainSpecificLanguage", true);
 
     }
 

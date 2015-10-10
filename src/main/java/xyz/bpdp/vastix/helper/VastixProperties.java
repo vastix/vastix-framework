@@ -1,4 +1,4 @@
-package name.bpdp.vastix.helper;
+package xyz.bpdp.vastix.helper;
 
 import java.io.FileNotFoundException;
 import java.util.Properties;

@@ -1,8 +1,7 @@
 buildscript {
     repositories { jcenter() }
     dependencies {
-        classpath 'com.github.jengelman.gradle.plugins:shadow:1.1.1',
-            'com.github.jengelman.gradle.plugins:shadow:1.2.1',
+        classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.2',
             // asciidoc gradle plugin
             // http://asciidoctor.org/docs/asciidoctor-gradle-plugin/
             'org.asciidoctor:asciidoctor-gradle-plugin:1.5.2'
@@ -22,7 +21,7 @@ apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: 'org.asciidoctor.convert'
 apply plugin: 'application'
 
-def vertxVersion = '3.0.0'
+def vertxVersion = '3.1.0'
 version = '1.0.0'
 
 sourceCompatibility = 1.8 
@@ -56,19 +55,19 @@ dependencies {
     compile 'io.vertx:vertx-auth:' + vertxVersion
     compile 'io.vertx:vertx-hazelcast:' + vertxVersion
     compile 'io.vertx:vertx-lang-groovy:' + vertxVersion
+    compile 'io.vertx:vertx-web-templ-thymeleaf:' + vertxVersion
     compile 'com.github.jknack:handlebars:1.3.0'
     compile 'org.thymeleaf:thymeleaf:2.1.4.RELEASE'
     compile fileTree(dir: 'lib', include: '*.jar')
-    compile 'com.bigdata:bigdata:1.5.2'
-    compile 'name.bpdp.vertx:blazegraph-service:1.0.0'
-    compile 'org.renjin:renjin-script-engine:0.7.1548'
+    compile 'com.bigdata:bigdata:1.5.3'
+    compile 'xyz.bpdp.vertx:blazegraph-service:1.0.0'
     testCompile 'junit:junit:4.12'
 }
 
 shadowJar {
     classifier = 'fat'
     manifest {
-        attributes 'Main-Class': 'name.bpdp.vastix.core.VastixServer'
+        attributes 'Main-Class': 'xyz.bpdp.vastix.core.VastixServer'
     }
     mergeServiceFiles {
         include 'META-INF/services/io.vertx.core.spi.VerticleFactory'
@@ -76,7 +75,7 @@ shadowJar {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.5'
+    gradleVersion = '2.7'
 }
 
-mainClassName = 'name.bpdp.vastix.core.VastixServer'
+mainClassName = 'xyz.bpdp.vastix.core.VastixServer'

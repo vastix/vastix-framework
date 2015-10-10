@@ -1,10 +1,10 @@
-package name.bpdp.kipo.verticles.prolog;
+package xyz.bpdp.kipo.verticles.prolog;
 
 import io.vertx.core.AbstractVerticle;
 import alice.tuprolog.*;
 
 /*
- * @author <a href="http://bpdp.name">Bambang Purnomosidi</a>
+ * @author <a href="http://bpdp.xyz">Bambang Purnomosidi</a>
  *
  */
 public class TuProlog extends AbstractVerticle {

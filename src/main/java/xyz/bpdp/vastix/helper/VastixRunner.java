@@ -1,7 +1,7 @@
-package name.bpdp.vastix.helper;
+package xyz.bpdp.vastix.helper;
 
 /*
- * @author <a href="http://bpdp.name">Bambang Purnomosidi D. P.</a>
+ * @author <a href="http://bpdp.xyz">Bambang Purnomosidi D. P.</a>
  */
 public class VastixRunner {
 

@@ -1,4 +1,4 @@
-package name.bpdp.vastix.verticles.dsl
+package xyz.bpdp.vastix.verticles.dsl
 
 import io.vertx.lang.groovy.GroovyVerticle
 import io.vertx.groovy.core.eventbus.EventBus
